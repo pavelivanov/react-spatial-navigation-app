@@ -1,0 +1,28 @@
+.search
+  height: 40px
+  background-color: rgba(153,153,153, 0.2)
+  absolute top 30px left 0 right 30px
+  input
+    height: 40px
+    background: none
+    padding 0 10px 0 50px
+    font-size: 16px
+    color #000
+    +input-placeholder()
+      color #fff
+  &:focus
+    background-color: #fff
+    input
+      +input-placeholder()
+        color #000
+    .icon
+      color #000
+
+.icon
+  size 40px
+  line-height: 40px
+  absolute top 0 left 0
+  pointer-events: none
+  text-align: center
+  font-size: 18px
+  color #fff

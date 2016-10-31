@@ -1,0 +1,29 @@
+input
+  vertical-align: top
+  margin: 0
+  padding: 0
+  border: 0
+  box-shadow none !important
+  &[type=submit]
+    background: none
+    cursor: pointer
+
+input, textarea, button, select
+  &:focus
+    outline: none !important;
+  &:-webkit-autofill
+    background: #fff !important
+    &:focus
+      background: #fff !important
+  &::-moz-focus-inner
+    border: 0 !important
+
+select:-moz-focusring
+  color: transparent
+  text-shadow: 0 0 0 #000
+  appearance: normal
+  -webkit-appearance: none
+  -moz-appearance: radio-container
+
+textarea
+  resize: none

@@ -1,0 +1,33 @@
+@import "_default"
+@import "_fonts"
+
+
+*,
+*:before,
+*:after
+  box-sizing: border-box
+  padding: 0
+  margin: 0
+
+html
+  height: 100%
+  font-size: 62.5% /* 62.5% of 16px = 10px */
+  margin 0
+  padding 0
+
+body
+  height: 100%
+  font-family "PT Sans", -apple-system, BlinkMacSystemFont, sans-serif
+  background-image: url(https://www.youtube.com/s/tv/html5/69c1419f/img/default_bg.png)
+  background-color: #191919
+  background-size: cover
+  overflow: hidden
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+a
+  text-decoration: none
+  color #1c6b9c
+  &:hover
+    text-decoration: underline
+    color $color_blue
