@@ -7,7 +7,7 @@ import style from './style'
 import Section from './Section'
 
 
-const getTransitionValue = (css) => parseInt(css.match(/\.*translateY\((.*)px\)/)[1])
+const getTransitionValue = (css) => css ? parseInt(css.match(/\.*translateY\((.*)px\)/)[1]) : 0
 
 const shiftSections = () => {
   const content                             = document.getElementsByClassName(style.content)[0]
@@ -29,7 +29,7 @@ const shiftSections = () => {
 
     if (direction == 'down') {
       const contentTranslateY = `${getTransitionValue(content.style.transform) - sectionFullHeight}px`
-      const sectionTranslateY = `${parseInt(sections[prevFocusedIndex].style.top) + sectionHeight}px`
+      const sectionTranslateY = `${getTransitionValue(sections[prevFocusedIndex].style.transform) + (sectionFullHeight - sectionHeight * 0.125)}px`
 
       content.style.transform = `translateY(${contentTranslateY}) `
       sections[prevFocusedIndex].className += ' hiddenSection'
