@@ -1,7 +1,8 @@
 import React from 'react'
 import cx from 'classnames'
 import Icon from 'react-fa'
-import { EventAggregator, SNReact } from 'react-spatial-navigation'
+import { EventAggregator } from 'spatial-navigation'
+import SNReact from 'react-spatial-navigation'
 
 import CSSModules from 'react-css-modules'
 import style from './style'

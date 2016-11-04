@@ -1,10 +1,10 @@
-var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+import webpack from 'webpack'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 
-module.exports = (webpackConfig) => {
+export default (webpackConfig) => {
   delete webpackConfig.devtool
-  
+
   webpackConfig.module.loaders = webpackConfig.module.loaders.map((loader) => {
     if (loader.test.test('*.css') || loader.test.test('*.styl')) {
       loader.loader = ExtractTextPlugin.extract('style', loader.loader.replace('style!', ''))
@@ -14,7 +14,7 @@ module.exports = (webpackConfig) => {
   })
 
   webpackConfig.plugins.push(
-    new ExtractTextPlugin('assets/css/[name].[hash:6].css', {
+    new ExtractTextPlugin('css/[name].[hash:6].css', {
       allChunks: true
     }),
     new webpack.optimize.UglifyJsPlugin({
@@ -26,7 +26,7 @@ module.exports = (webpackConfig) => {
         warnings: false,
         screw_ie8: true
       }
-    })
+    }),
   )
 
   return webpackConfig

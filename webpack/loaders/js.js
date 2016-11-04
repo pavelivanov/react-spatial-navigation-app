@@ -1,7 +1,7 @@
-module.exports = [
+export default [
   {
     test: /\.js$/,
-    loader: 'babel',
+    loaders: [ 'babel' ],
     exclude: /node_modules/,
-  }
+  },
 ]

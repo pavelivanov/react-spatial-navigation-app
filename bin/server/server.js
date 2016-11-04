@@ -1,47 +1,23 @@
-var path                  = require('path')
-var express               = require('express')
-var bodyParser            = require('body-parser')
+import webpack from 'webpack'
+import express from 'express'
+import bodyParser from 'body-parser'
+import historyApiFallback from 'connect-history-api-fallback'
+import webpackMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
+import webpackConfig from '../../webpack'
+import config from '../../config'
 
 
-const isDeveloping = process.env.NODE_ENV !== 'production'
-const port = process.env.PORT || 3333
-const app = express()
+const port      = config.http.port
+const app       = express()
+const compiler  = webpack(webpackConfig)
 
-
+app.disable('x-powered-by')
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-
-
-if (isDeveloping) {
-  var webpack               = require('webpack')
-  var config                = require('../../webpack')
-  var webpackMiddleware     = require('webpack-dev-middleware')
-  var webpackHotMiddleware  = require('webpack-hot-middleware')
-
-  const compiler = webpack(config)
-  const middleware = webpackMiddleware(compiler, {
-    publicPath: config.output.publicPath,
-    contentBase: config.entry[0],
-    noInfo: true,
-    stats: 'errors-only',
-    hot: true,
-    lazy: false
-  })
-
-  app.use(middleware)
-  app.use(webpackHotMiddleware(compiler))
-  app.get('*', function response(req, res) {
-    res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '../../build/index.html')))
-    res.end()
-  })
-}
-else {
-  app.use(express.static(path.resolve(__dirname, '../../build')))
-  app.get('*', function response(req, res) {
-    res.sendFile('index.html', { root: path.join(__dirname, '../../build') })
-  })
-}
-
+app.use(bodyParser.json({ strict: true, limit: '10mb' }))
+app.use(historyApiFallback())
+app.use(webpackMiddleware(compiler, webpackConfig.devServer))
+app.use(webpackHotMiddleware(compiler))
 
 app.listen(port, '0.0.0.0', (err) => {
   if (err) {

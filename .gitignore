@@ -1,6 +1,6 @@
 .idea
-*.log
 
-node_modules/
-build/
-lib/
+*.log*
+
+build
+node_modules
