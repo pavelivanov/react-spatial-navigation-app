@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import SNReact from 'react-spatial-navigation'
+import getMocks from 'util/getMocks'
 
 import CSSModules from 'react-css-modules'
 import contentStyle from '../style'
@@ -42,29 +43,60 @@ const shiftItems = (sectionWrapper, section) => {
 }
 
 
-@SNReact.Decorators.Element()
+@SNReact.Decorators.Element({
+  hasCollection: true,
+  collectionSettings: {
+    lazy: {
+      right: {
+        fromEnd: 3,
+      }
+    }
+  }
+})
 @CSSModules(style)
 export default class ContentSection extends React.Component {
   constructor(props) {
     super()
-
+    
     this.state = {
-      sections: null
+      items: []
     }
   }
 
+  componentWillMount() {
+    getMocks(8).then((items) => {
+      this.setState({
+        items,
+      })
+    })
+  }
+
   componentDidMount() {
-    const { SNElement: { collection } } = this.props
+    const { SNElement, SNElement: { collection } } = this.props
 
     const wrapper = ReactDOM.findDOMNode(this.refs.wrapper)
     const section = ReactDOM.findDOMNode(this.refs.section)
     const method = shiftItems(wrapper, section)
 
+    SNElement.collection.subscribeLazyLoad((fulfill) => {
+      getMocks(8).then((items) => {
+        this.setState({
+          items: [
+            ...this.state.items,
+            ...items
+          ],
+        }, () => {
+          fulfill()
+        })
+      })
+    })
+
     collection.eventAggregator.subscribe('onNavigate', () => method(collection.focusedIndex))
   }
 
   render() {
-    const { index: sectionIndex, items } = this.props
+    const { items } = this.state
+    const { index: sectionIndex } = this.props
 
     const styles = {
       top: `${100 * sectionIndex}%`
@@ -83,5 +115,3 @@ export default class ContentSection extends React.Component {
     )
   }
 }
-
-// <Item key={index} {...item} sectionIndex={sectionIndex * 25} index={index} disabled={!Boolean((index + 1) % 5)} />

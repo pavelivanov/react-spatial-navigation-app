@@ -11,10 +11,6 @@ import MediaCard from 'components/MediaCard'
 @CSSModules(style, { allowMultiple: true })
 export default class ContentSectionItem extends React.Component {
   render() {
-    const { sectionIndex, index, disabled } = this.props
-    const { thumbnailUrl } = this.props
-
-
     return (
       <div styleName="item">
         <MediaCard  />

@@ -37,7 +37,7 @@ const webpackConfig = {
     fallback: [
       config.paths.base('node_modules'),
     ],
-    modulesDirectories: [ 'client', 'shared', 'node_modules' ],
+    modulesDirectories: [ 'client', 'shared', 'local_modules', 'node_modules' ],
     extensions: [ '', '.js', '.css', '.styl' ],
     alias: {
       'react-spatial-navigation': path.resolve('/Users/grammka/GitHubProjects/react-spatial-navigation/src'),

@@ -1,5 +1,6 @@
 import React from 'react'
 import SNReact from 'react-spatial-navigation'
+import getMocks from 'util/getMocks'
 
 import CSSModules from 'react-css-modules'
 import style from './style'
@@ -52,11 +53,24 @@ const shiftSections = () => {
 
 @SNReact.Decorators.Container('Content', {
   map: { up: 'Search', left: 'Sidebar' },
-  startContainer: true,
 })
 @CSSModules(style)
 export default class Content extends React.Component {
-  sections = Array.apply(null, {length: 10}).map(() => Array.apply(null, {length: 15}).map(Number.call, Number))
+  constructor(props) {
+    super()
+
+    this.state = {
+      items: []
+    }
+  }
+
+  componentWillMount() {
+    getMocks(6).then((items) => {
+      this.setState({
+        items,
+      })
+    })
+  }
 
   componentDidMount() {
     const { SNContainer: { collection } } = this.props
@@ -66,12 +80,14 @@ export default class Content extends React.Component {
   }
 
   render() {
+    const { items } = this.state
+
     return (
       <div styleName="wrapper">
         <div styleName="content">
           {
-            this.sections.map((items, index) => (
-              <Section key={index} index={index} items={items} />
+            items.map((item, index) => (
+              <Section key={index} index={index} />
             ))
           }
           <div styleName="dumbSectionPlaceholder"></div>
