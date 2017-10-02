@@ -5,7 +5,7 @@ const basePath = path.resolve(__dirname, '../')
 
 const http = {
   host: 'localhost',
-  port: process.env.PORT || 5000,
+  port: process.env.PORT || 2000,
 }
 
 const paths = {
