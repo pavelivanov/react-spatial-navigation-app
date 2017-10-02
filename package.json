@@ -17,7 +17,9 @@
     "react-fa": "^4.1.2",
     "react-highlight.js": "^1.0.5",
     "react-router": "^3.0.0",
-    "reflexbox": "^2.2.2"
+    "react-spatial-navigation": "0.0.5",
+    "reflexbox": "^2.2.2",
+    "spatial-navigation": "0.0.8"
   },
   "devDependencies": {
     "app-module-path": "^2.1.0",

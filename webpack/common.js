@@ -39,10 +39,10 @@ const webpackConfig = {
     ],
     modulesDirectories: [ 'client', 'shared', 'local_modules', 'node_modules' ],
     extensions: [ '', '.js', '.css', '.styl' ],
-    alias: {
-      'react-spatial-navigation': path.resolve('/Users/grammka/GitHubProjects/react-spatial-navigation/src'),
-      'spatial-navigation': path.resolve('/Users/grammka/GitHubProjects/spatial-navigation/src'),
-    }
+    // alias: {
+    //   'react-spatial-navigation': path.resolve('/Users/grammka/GitHubProjects/react-spatial-navigation/src'),
+    //   'spatial-navigation': path.resolve('/Users/grammka/GitHubProjects/spatial-navigation/src'),
+    // }
   },
   resolveLoader: {
     root: config.paths.base('node_modules'),
